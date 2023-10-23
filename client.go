@@ -104,7 +104,7 @@ func (c *Client) GetReport(ctx context.Context, prefixTitleRequest, dir string, 
 			Filter:   filter,
 		},
 		FieldNames:    fields,
-		Page:          &common.Page{Limit: 50_000, Offset: 0},
+		Page:          &common.Page{Limit: 1_000_000, Offset: 0},
 		ReportName:    reportName,
 		ReportType:    typeReport,
 		DateRangeType: dtRangeType,
@@ -159,7 +159,7 @@ func (c *Client) GetFiles(ctx context.Context, dir string, params statistics.Rep
 				params.Page.Offset += params.Page.Limit
 				part++
 				params.ReportName = reportName + fmt.Sprintf("_part_%d", part)
-				continue
+				return result, nil
 			} else {
 				return result, nil
 			}
